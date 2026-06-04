@@ -86,7 +86,7 @@ export default function NewsletterForm() {
                 id="whatsapp"
                 checked={receiveWhatsapp}
                 onChange={(e) => setReceiveWhatsapp(e.target.checked)}
-                className="mt-1 h-4 w-4 accent-[#dc2626] appearance-auto"
+                className="mt-1 h-4 w-4 accent-[#ef4444]"
               />
 
               <label
