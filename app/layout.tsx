@@ -15,6 +15,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Knowledge Center",
   description: "Developed By Dilipoint Ltd",
+
+  icons: {
+    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
+    apple: "/apple-icon.png",
+  },
+
+  openGraph: {
+    title: "Knowledge Center",
+    description: "Developed By Dilipoint Ltd",
+    images: ["/opengraph-image.png"],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -28,8 +44,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-white text-black">
-  {children}
-</body>
+        {children}
+      </body>
     </html>
   );
 }
