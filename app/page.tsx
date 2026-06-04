@@ -45,8 +45,7 @@ export default function NewsletterForm() {
   />
 
   <p className="text-gray-600 text-[15px] leading-relaxed">
-    Join 1000+ of professionals & entrepreneurs receiving business insights
-    & growth opportunities.
+    Join 1000+ of professionals & entrepreneurs receiving Weekly business insights.
   </p>
 </div>
 
