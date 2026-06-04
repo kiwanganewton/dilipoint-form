@@ -1,65 +1,160 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+export default function NewsletterForm() {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [receiveWhatsapp, setReceiveWhatsapp] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    console.log({
+      fullName,
+      email,
+      phone,
+      receiveWhatsapp,
+    });
+
+    setTimeout(() => {
+      alert("Thank you! You've successfully joined.");
+
+      setFullName('');
+      setEmail('');
+      setPhone('');
+      setReceiveWhatsapp(false);
+      setLoading(false);
+    }, 1500);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+   <section className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 md:py-16">
+  <div className="max-w-md w-full">
+    <div className="bg-white border border-gray-200 rounded p-6 sm:p-8">
+      <div className="text-center mb-8">
+  <img
+    src="/dilipoint-logo.png"
+    alt="Dilipoint"
+    className="h-14 mx-auto mb-4 w-auto"
+  />
+
+  <p className="text-gray-600 text-[15px] leading-relaxed">
+    Join 1000+ of professionals & entrepreneurs receiving business insights
+    & growth opportunities.
+  </p>
+</div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="John Mwita"
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-red-600 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="john@example.com"
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-red-600 transition-colors"
+              />
+            </div>
+
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="whatsapp"
+                checked={receiveWhatsapp}
+                onChange={(e) => setReceiveWhatsapp(e.target.checked)}
+                className="mt-1 h-4 w-4 accent-red-600"
+              />
+
+              <label
+                htmlFor="whatsapp"
+                className="text-sm text-gray-700 leading-relaxed cursor-pointer"
+              >
+                I would like to receive business insights and updates via
+                WhatsApp.
+              </label>
+            </div>
+
+            <AnimatePresence initial={false}>
+  {receiveWhatsapp && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{
+        duration: 0.25,
+        ease: 'easeOut',
+      }}
+      className="overflow-hidden"
+    >
+      <div className="pt-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          WhatsApp Phone Number
+        </label>
+
+        <input
+          type="tel"
+          required
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="+255 612 345 678"
+          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-red-600 transition-colors"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+            <button
+              type="button"
+              className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:border-gray-400 py-3 px-4 rounded text-gray-700 font-medium transition-colors"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <img
+                src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png"
+                alt="Google"
+                className="w-5 h-5"
+              />
+              Join with Google
+            </button>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white py-3 rounded font-semibold transition-colors"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              {loading ? 'Joining...' : 'Join Free'}
+            </button>
+
+            <p className="text-center text-xs text-gray-500 pt-2">
+              We respect your inbox. Unsubscribe anytime.
+            </p>
+          </form>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
