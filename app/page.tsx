@@ -36,7 +36,7 @@ export default function NewsletterForm() {
   return (
    <section className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 md:py-16">
   <div className="max-w-md w-full">
-    <div className="bg-white border border-gray-200 rounded p-6 sm:p-8">
+    <div className="bg-white border border-gray-300 rounded p-6 sm:p-8">
       <div className="text-center mb-8">
   <img
     src="/dilipoint-logo.png"
