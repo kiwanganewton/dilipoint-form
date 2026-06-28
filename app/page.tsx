@@ -9,29 +9,32 @@ export default function NewsletterForm() {
   const [phone, setPhone] = useState('');
   const [receiveWhatsapp, setReceiveWhatsapp] = useState(false);
   const [loading, setLoading] = useState(false);
+ const [showSuccess, setShowSuccess] = useState(false);
+ 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
 
-    console.log({
-      fullName,
-      email,
-      phone,
-      receiveWhatsapp,
-    });
+  console.log({
+    fullName,
+    email,
+    phone,
+    receiveWhatsapp,
+  });
 
-    setTimeout(() => {
-      alert("Thank you! You've successfully joined.");
+  setTimeout(() => {
+    setShowSuccess(true);
 
-      setFullName('');
-      setEmail('');
-      setPhone('');
-      setReceiveWhatsapp(false);
-      setLoading(false);
-    }, 1500);
-  };
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setReceiveWhatsapp(false);
+    setLoading(false);
+  }, 1500);
+};
+
 
   return (
    <section className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 md:py-16">
@@ -167,6 +170,117 @@ export default function NewsletterForm() {
 </form>
         </div>
       </div>
+
+
+
+  {/* REGISTRATION SUCCESS POPUP */}
+
+
+<AnimatePresence>
+  {showSuccess && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setShowSuccess(false)}
+    >
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        initial={{
+          opacity: 0,
+          scale: 0.85,
+          y: 20,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.95,
+        }}
+        transition={{
+          duration: 0.35,
+          ease: "easeOut",
+        }}
+        className="bg-white rounded border border-gray-200 shadow-lg shadow-gray-200/60 w-full max-w-sm p-8 text-center"
+      >
+        {/* Animated Success Icon */}
+
+        <div className="relative mx-auto w-20 h-20">
+          <motion.div
+            className="absolute inset-0 rounded-full border-4 border-red-100"
+            animate={{
+              scale: [1, 1.12, 1],
+              opacity: [1, 0.35, 1],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+            }}
+          />
+
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 180,
+            }}
+            className="absolute inset-2 rounded-full bg-red-600 flex items-center justify-center"
+          >
+            <motion.svg
+              viewBox="0 0 52 52"
+              className="w-8 h-8"
+            >
+              <motion.path
+                fill="none"
+                stroke="#fff"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14 27l8 8 16-18"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{
+                  delay: 0.3,
+                  duration: 0.5,
+                }}
+              />
+            </motion.svg>
+          </motion.div>
+        </div>
+
+        <motion.h3
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="mt-8 text-2xl font-semibold text-gray-900"
+        >
+         Welcome Aboard!
+        </motion.h3>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+          className="mt-3 text-[15px] leading-7 text-gray-600"
+        >
+          You have successfully joined the Dilipoint Business Growth Center.
+       
+        </motion.p>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
+
+
+
+
     </section>
   );
 }
