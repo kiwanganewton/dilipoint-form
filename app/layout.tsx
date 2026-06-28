@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Knowledge Center",
-  description: "Join 1000+ of professionals & entrepreneurs.",
+  title: "Business Growth Center",
+  description: "Join 1000+ of professionals, business owners & entrepreneurs.",
 
   icons: {
     icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Knowledge Center",
-    description: "Join 1000+ of professionals & entrepreneurs.",
+    title: "Business Growth Center",
+    description: "Join 1000+ of professionals, Business owners & entrepreneurs.",
     images: ["/opengraph-image.png"],
   },
 
